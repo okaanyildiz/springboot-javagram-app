@@ -17,11 +17,6 @@ public class JavagramController {
         return "sign-up";
     }
 
-    @GetMapping("/result")
-    public String getResult() {
-        return "result";
-    }
-
     @PostMapping("/submitItem")
     public String handleSubmit(@Valid User user, BindingResult result) {
         if (user.getFirstName().equals(user.getLastName()))
@@ -30,4 +25,10 @@ public class JavagramController {
             return "sign-up";
         return "redirect:/result";
     }
+
+    @GetMapping("/result")
+    public String getResult() {
+        return "result";
+    }
+
 }

@@ -8,29 +8,31 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
+import ozi.javagram.validation.Age;
+import ozi.javagram.validation.Username;
 
 public class User {
-    @NotBlank(message = "First Name cannot be blank")
+
+    @NotBlank(message = "First name cannot be blank")
     @Size(min = 2, message = "First name is too short")
     private String firstName;
 
-    @NotBlank(message = "Last Name cannot be blank")
+    @NotBlank(message = "Last name cannot be blank")
     @Size(min = 2, message = "Last name is too short")
     private String lastName;
 
+    @Username(message = "Cannot contain special characters or uppercase characters ")
     @NotBlank(message = "Username cannot be blank")
-    @Size(min = 7, message = "Username cannot be less than 7 charachters")
+    @Size(min = 7, message = "Username is too short")
     private String userName;
 
-    @Email(message = "You must enter a valid Email adress")
+    @Email(message = "Invalid Email")
     private String email;
 
-    @Past(message = "Invalid birthdate")
+    @Age(message = "Must be at least 18")
+    @Past(message = "date of birth must be in the past")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
-
-    public User() {
-    }
 
     public User(String firstName, String lastName, String userName, String email, Date dateOfBirth) {
         this.firstName = firstName;
@@ -39,6 +41,12 @@ public class User {
         this.email = email;
         this.dateOfBirth = dateOfBirth;
     }
+
+
+    public User() {
+
+    }
+
 
     public String getFirstName() {
         return this.firstName;
@@ -79,5 +87,4 @@ public class User {
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-
 }
